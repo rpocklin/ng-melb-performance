@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Benchpressing Angular.js</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section>
+        <h2><span>Benchpressing Angular + Javascript</span></h2><br><img src="../images/benchpress1.jpg">
+      </section>
+      <section><br><br>
+        <h2>Quick Intro</h2>
+        <li></li>
+        <li>Rob Pocklington</li>
+        <li>Full-stack developer my whole career (12 years)</li>
+        <li>been using <span style="color: #99cc00">J-Query</span> and <span style="color: #9966ff">Javascript</span> for 5+ years</li>
+        <li><span style="color: #00cc66">Backbone.js</span> for almost 2 years</li>
+        <li><span style="color: #6699ff">Angular.js</span> for the same</li><br><br><br><br><br><br>
+      </section>
+      <section>
+        <h2>What am I here to talk about?</h2>
+        <li></li>
+        <li style="color: #6688ff;" class="small">Why frontend performance is important</li>
+        <li style="color: #aaccff" class="small">Common performance issues in Javascript</li>
+        <li></li>
+        <li style="color: #00ffaa" class="small">Review of tools (that help you to):</li>
+        <li style="color: #eeaaaa" class="small">Write performance tests</li>
+        <li style="color: #ddeecc" class="small">Run (and automate) performance tests</li><br>
+        <li></li>
+      </section>
+      <section>
+        <h2>Performance - why do we care?</h2>
+        <li></li>
+        <li>Because your users <strike>are impatient</strike> have expectations</li>
+        <li><i>http://yoursite.com takes ...</i></li>
+        <li>0.1 second &nbsp;&nbsp;:)</li>
+        <li>1 second &nbsp;&nbsp;&nbsp;&nbsp;:|<br></li>
+        <li><img src="../images/spinner.gif"><br></li>
+        <li>5 seconds&nbsp;&nbsp;&nbsp;&nbsp;:( <br></li>
+      </section>
+      <section>
+        <h2>Fast Forwarding past ...</h2>
+        <li></li>
+        <li>
+          Animations / CSS 3
+          <br><span style="float: right">( check out: Transit.js or Velocity.js )</span><br><br>
+        </li>
+        <li>
+          any type of API performance
+          <br><span style="float: right">( check out: Grindr, Gatling, JMeter, Apache Bench )</span><br><br>
+        </li>
+        <li>
+          any functional  / end-to-end testing
+          <br><span style="float: right">( check out: Cucumber / JBehave / Selenium*.* )</span>
+        </li><br><br><br>
+      </section>
+      <section><br>
+        <h2>Common performance issues in Javascript</h2>
+        <li class="small">read: lets see some buggy code!</li>
+        <li>
+          <p>Recursion (see recursion)</p><span class="code small">http://localhost:9000/graph/perf-recursion.html</span>
+        </li>
+        <li>
+          <p>Jank</p><span class="code small">http://rawgit.com/rpocklin/scroll-to-top/master/demo.html?load=1</span>
+        </li>
+        <li>
+          <p>Memory issues / leaks (closure)</p><span class="code small">http://localhost:9000/graph/perf-closure-memory-leak.html</span>
+        </li><br><br>
+      </section>
+      <section>
+        <h2>Quick Tips for avoiding these problems</h2>
+        <li></li>
+        <li>Don't use implicit lexical binding in closures.</li>
+        <li class="code small">Instead use explicit function parameters.  Much cleaner.</li><br>
+        <li><span>Don't use</span><code class="small"> setInterval&nbsp;</code></li>
+        <li class="code small">Instead use setTimeout and re-schedule on success.  Much safer.</li>
+        <li></li>
+        <li class="code small">Bind = Unbind</li>
+        <li class="code small"><span>Always consider</span><code>&nbsp;$destroy</code></li><br>
+        <li>If you're not sure... test!</li><br>
+      </section>
+      <section><br>
+        <h2>Testing Javascript</h2>
+        <li></li>
+        <li>JSTest Driver, Q-Unit, Jasmine,</li>
+        <li>Mocha, Chai...</li>
+        <li>Great for unit testing ...</li>
+        <li>but now you wanna test performance ...</li><br><br><img src="../images/coffee.png" style="width: 150px; height: 150px;">
+      </section>
+      <section>
+        <h2><u>What</u> should I performance test?</h2>
+        <li></li>
+        <li>
+          <span style="color: #66ff99">Algorithmic Performance</span><br/>
+          ( transforms, calculations, regex, recursion, fibbonacci ) <br/><br/>
+        </li>
+        <li>
+          <span style="color: #9999ff">DOM Rendering Performance</span><br/>
+          ( render times ) <br/><br/>
+        </li>
+        <li>
+          <span style="color: #ff7070">Memory leaks</span><br/>
+          ( event listeners / timers / sockets / closures )
+        </li><br>
+      </section>
+      <section><br><br>
+        <h2><u>How</u> do I performance test?</h2>
+        <li></li>
+        <li>You need a Javascript engine</li>
+        <li><img src="../images/v8.jpg" width="200px" height="160px" style="top: 20px; position: relative; left: 10px;"></li><br><br>
+        <li>but which one should I use?</li>
+        <li>Whichever your customers use :)</li><br><br>
+      </section>
+      <section>
+        <h2>When performance testing ...</h2>
+        <p style="font-size: 200%">
+          in <i style="color: #0099ff">Node.js</i> <br/><br/>
+          <code>npm install microtime</code>
+        </p><br><br><br><br><br>
+      </section>
+      <section><br><br>
+        <h2>When performance testing ...</h2>
+        <p style="font-size: 200%">
+          in <i style="color: #99ff66">Chrome</i><br/><br/>
+          <code style="font-size: 75%">chrome --enable-benchmarking <br>--incognito</code>
+        </p><br>
+        <p>( and don't use <i>Cygwin</i> )</p><br><br><br><br>
+      </section>
+      <section>
+        <h2><span style="font-size: 150%">Enough already, lets run through the tools ...</span></h2><br>
+      </section>
+      <section><br>
+        <h2>Benchpress ( no plugin support )</h2>
+        <h3><i>https://github.com/angular/benchpress</i></h3>
+        <li class="cmd">benchpress run</li><br>
+        <li>Used in the <a href="https://github.com/angular/angular.js/tree/master/benchmarks">angular.js</a> project</li>
+        <li>what do they test?</li>
+        <li></li>
+        <li>order by (algorithmic)</li>
+        <li>large tables (watchers and DOM manipulation)</li>
+        <li>event delegation</li>
+        <li>parsing expressions (AngularJS parser)</li>
+      </section>
+      <section>
+        <li>Needs chrome canary installed</li>
+        <li>Can test Angular.js controllers and views</li>
+        <li>Scant documentation, last commit 2 months ago</li>
+        <li>Fragile test harness ( obscure errors until you get it right )</li>
+        <li>manual build step <code>benchpress build</code></li>
+        <li>Can't automate<i>&nbsp; :(</i></li>
+        <li>Hard to do comparisons (no graphs etc.)<i>&nbsp; :(</i></li><br>
+      </section>
+      <section>
+        <h2>Benchmark.js (Karma + Grunt plugins)</h2>
+        <li>http://benchmarkjs.com</li>
+        <p class="code small">also http://jsperf.com</p><br><br>
+      </section>
+      <section><br>
+        <h2>Grunt-benchmark ( benchmark.js )</h2>
+        <h3><i>https://github.com/shama/grunt-benchmark</i></h3>
+        <p class="cmd">grunt benchmark</p>
+        <li></li>
+        <li><span>Cannot reference&nbsp;</span><span class="code">window</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :(</span></li>
+        <li>Can't use<span class="code"> inject()</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:(</span></li>
+        <li>Outputs to CSV or JSON and ASCII table :)</li>
+        <li>but no JUnit Reporter XML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:(</li>
+        <li>Not widely adopted &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:(</li><br><br>
+      </section>
+      <section><br>
+        <h2>Karma-benchmark ( benchmark.js )</h2>
+        <h3><i>https://github.com/JamieMason/karma-benchmark</i></h3>
+        <p class="cmd">grunt karma:benchmarkjs</p>
+        <li></li>
+        <li>Can reference&nbsp;<span class="code">window</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></li>
+        <li>Can't use<span class="code"> inject()</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:(</span></li>
+        <li>Good CI integration - JUnit Reporter :)</li><br><br><br><br>
+      </section>
+      <section>
+        <h2>Benchmark.js ( no build plugins )</h2>
+        <h3><i>http://benchmarkjs.com</i></h3>
+        <p class="cmd">grunt karma:unit</p>
+        <li></li>
+        <li>Works with Jasmine&nbsp;<span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w00t</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span><br></li>
+        <li>Can reference&nbsp;<span class="code">window</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></li>
+        <li><span>&nbsp;&nbsp;&nbsp;Can use&nbsp;</span><span class="code">inject</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)&nbsp;&nbsp;</span><br></li>
+        <li>&nbsp;&nbsp;Can assert performance metrics  :)&nbsp;</li>
+        <li>Can't graph different algorithms :(</li>
+      </section>
+      <section><br>
+        <h2>JSLitmus ( no build plugins )</h2>
+        <h3><i>http://www.broofa.com/Tools/JSLitmus/</i></h3>
+        <p class="cmd">grunt karma:jslitmus</p>
+        <li></li>
+        <li>Works with Jasmine&nbsp;<span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w00t</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span><br></li>
+        <li>Can reference&nbsp;<span class="code">window</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)</span></li>
+        <li><span>&nbsp;&nbsp;&nbsp;Can use&nbsp;</span><span class="code">inject</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:)&nbsp;&nbsp;</span><br></li>
+        <li>&nbsp;&nbsp;Can assert performance metrics  :)&nbsp;</li>
+        <li>Can't graph different algorithms :(</li><br><br>
+      </section>
+      <section>
+        <h2>Review</h2>
+        <li></li>
+        <li>
+          If you only want to performance test algorithms etc <br>(not UI / DOM / views)
+          use <span style="color: #99ff66">karma-benchmark</span>
+        </li><br>
+        <li>
+          If you want to fail the build if a test fails a performance metric on any browser,
+          or you want to test AngularJS modules, use <br><span style="color: #aaccff">Benchmark.js</span> ( no plugins ) with Jasmine
+        </li><br>
+        <li>
+          If you want to interact with tests and manually compare and run them yourself,
+          use whichever you like the most.
+        </li><br><br>
+      </section>
+      <section>
+        <h2>Other Resources</h2>
+        <li>
+          <br>
+          AngularJS - Benchpress performance tests
+          <br><i>https://github.com/angular/angular.js/tree/master/benchmarks</i>
+        </li><br>
+        <li>
+          Hundreds of performance test candiates in Javascript using Benchmark.js
+          <br><i>http://www.jsperf.com</i>
+        </li><br>
+        <li>
+          <a href="http://google.github.io/latency-benchmark/">Google's Web Browser Latency Benchmark</a>
+          <br><i>http://google.github.io/latency-benchmark/</i>
+        </li><br>
+        <li>
+          <a href="https://github.com/marmelab/gremlins.js">Gremlins.js</a> - aka Chaos MonkeyJS
+          <br><i>https://github.com/marmelab/gremlins.js</i>
+        </li><br>
+      </section>
+      <section>
+        <h2 style="color: #aa99ff">Questions?</h2><br><br><br>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
